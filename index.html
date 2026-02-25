@@ -1,228 +1,424 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sannik Mukherjee | Full Stack Developer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sannik Mukherjee | Full Stack Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- ✅ Tailwind Config Added (No Design Change) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; 
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(147, 51, 234, 0.08) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-<!-- FOUC FIX -->
-<style>
-body { visibility:hidden; }
-</style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) translateZ(0); 
+            transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            will-change: transform, border-color;
+        }
+        .glass:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-5px) translateZ(0);
+        }
 
-<style>
-body {
-  font-family: 'Inter', sans-serif;
-  background:#050505;
-  color:#fff;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
+        .profile-img-container {
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(45deg, #3b82f6, #9333ea);
+            border-radius: 50%;
+            display: inline-block;
+        }
 
-/* Background */
-.bg-blur {
-  position:fixed;
-  inset:0;
-  background:
-  radial-gradient(circle at 20% 30%, rgba(59,130,246,0.08), transparent 40%),
-  radial-gradient(circle at 80% 70%, rgba(147,51,234,0.08), transparent 40%);
-  z-index:-1;
-}
+        .nav-link {
+            position: relative;
+            color: #9ca3af;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+        }
+        .nav-link:hover { color: #ffffff; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after { width: 100%; }
 
-/* Reveal Animation */
-.reveal {
-  opacity:0;
-  transform:translateY(40px);
-  transition:all .8s cubic-bezier(.16,1,.3,1);
-}
-.reveal.active {
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* Glass */
-.glass {
-  background:rgba(255,255,255,0.03);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.08);
-  transition:.4s ease;
-}
-.glass:hover {
-  transform:translateY(-6px);
-  border-color:rgba(59,130,246,0.4);
-}
-
-/* Typing cursor */
-#typing::after{
-  content:"|";
-  animation:blink 1s infinite;
-}
-@keyframes blink{50%{opacity:0;}}
-
-</style>
+        #typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
 </head>
+<body class="antialiased">
 
-<body>
+<!-- ⬇⬇⬇ এখান থেকে তোমার original body untouched থাকবে ⬇⬇⬇ -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; 
+        }
 
-<div class="bg-blur"></div>
+        /* Optimized Background for Zero Lag */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(147, 51, 234, 0.08) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-<!-- NAV -->
-<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-5">
-<div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        /* Hardware Accelerated Smooth Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) translateZ(0); 
+            transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+        }
 
-<h1 class="text-2xl md:text-3xl font-black tracking-tight">
-<span class="text-blue-500">SANNIK</span>.DEV
-</h1>
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            will-change: transform, border-color;
+        }
+        .glass:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-5px) translateZ(0);
+        }
 
-<div class="hidden lg:flex space-x-10 text-sm font-semibold uppercase tracking-wider">
-<a href="#about" class="hover:text-blue-400 transition">About</a>
-<a href="#skills" class="hover:text-blue-400 transition">Tech</a>
-<a href="#projects" class="hover:text-blue-400 transition">Projects</a>
-<a href="#contact" class="px-6 py-2 bg-blue-600 rounded-full hover:bg-blue-500 transition">Hire Me</a>
-</div>
+        /* Profile Image Gradient Border */
+        .profile-img-container {
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(45deg, #3b82f6, #9333ea);
+            border-radius: 50%;
+            display: inline-block;
+        }
 
-</div>
+        /* Navbar Hover Underline */
+        .nav-link {
+            position: relative;
+            color: #9ca3af;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+        }
+        .nav-link:hover { color: #ffffff; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Typing cursor */
+        #typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="antialiased">
+
+<div class="bg-gradient"></div>
+
+<nav class="fixed top-0 w-full z-50 transition-all duration-300 py-4" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+        
+        <a href="#" class="text-2xl md:text-3xl font-extrabold tracking-tighter z-[60] shrink-0">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">SANNIK</span><span class="text-white">.DEV</span>
+        </a>
+
+        <div class="hidden lg:flex items-center space-x-6 lg:space-x-10 text-sm font-semibold uppercase tracking-widest">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Tech</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="px-6 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-blue-600 hover:border-blue-600 transition-all duration-300 text-white transform hover:scale-105 shrink-0">Hire Me</a>
+        </div>
+
+        <button id="menuBtn" class="lg:hidden text-3xl text-white z-[60] focus:outline-none flex items-center justify-center transition-transform duration-300 w-10 h-10">
+            <span id="menuIcon">&#9776;</span>
+        </button>
+    </div>
 </nav>
 
-<!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-28">
+<div id="mobileMenu" class="fixed inset-0 bg-[#030303]/98 backdrop-blur-xl z-50 flex flex-col justify-center items-center space-y-8 text-2xl font-bold transition-all duration-400 opacity-0 pointer-events-none translate-y-[-20px]">
+    
+    <button id="closeMenuBtn" class="absolute top-6 right-6 text-4xl text-white focus:outline-none hover:text-blue-500 transition-colors">
+        &#10005;
+    </button>
 
-<div class="reveal">
-<img src="./assets/Profile_01.jpg"
-class="w-36 h-36 md:w-44 md:h-44 rounded-full object-cover border-4 border-blue-600 shadow-xl mx-auto">
+    <a href="#" class="mobile-link text-gray-400 hover:text-white transition-all">Home</a>
+    <a href="#about" class="mobile-link text-gray-400 hover:text-white transition-all">About</a>
+    <a href="#skills" class="mobile-link text-gray-400 hover:text-white transition-all">Tech Stack</a>
+    <a href="#projects" class="mobile-link text-gray-400 hover:text-white transition-all">Projects</a>
+    <a href="#contact" class="mobile-link text-blue-500 transition-all px-10 py-3 bg-white/5 border border-white/10 rounded-full">Hire Me</a>
 </div>
 
-<h1 class="text-4xl md:text-6xl lg:text-7xl font-black mt-8 reveal">
-Sannik Mukherjee
-</h1>
+<section class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 md:pt-20 relative text-center">
+    
+    <div class="profile-img-container mb-8 reveal">
+        <img src="./assets/Profile_01.jpg" alt="Sannik Mukherjee" class="w-32 h-32 md:w-44 md:h-44 rounded-full object-cover border-4 border-[#030303]">
+    </div>
 
-<p class="text-lg md:text-2xl text-gray-400 mt-4 h-8 reveal">
-<span id="typing"></span>
-</p>
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 md:mb-6 tracking-tight reveal">
+        Full Stack <span class="text-blue-500">Architect.</span>
+    </h1>
+    
+    <p class="text-base md:text-2xl text-gray-400 font-light mb-10 h-8 reveal text-center w-full">
+        <span id="typing"></span>
+    </p>
 
-<div class="flex flex-col sm:flex-row gap-4 mt-10 reveal">
-<a href="#projects"
-class="px-8 py-4 bg-blue-600 rounded-full font-semibold hover:bg-blue-500 transition transform hover:-translate-y-1">
-View My Work
-</a>
-<a href="https://github.com/San041174"
-target="_blank"
-class="px-8 py-4 border border-white/20 rounded-full hover:bg-white/10 transition transform hover:-translate-y-1">
-GitHub
-</a>
-</div>
-
+    <div class="flex flex-col sm:flex-row gap-4 reveal w-full sm:w-auto">
+        <a href="#projects" class="px-8 py-4 bg-blue-600 rounded-full font-bold hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] text-center text-sm md:text-base transform hover:-translate-y-1">
+            View My Work
+        </a>
+        <a href="https://github.com/YOUR_GITHUB" target="_blank" class="px-8 py-4 bg-white/5 border border-white/10 rounded-full font-bold hover:bg-white/10 hover:border-white transition-all text-center text-sm md:text-base transform hover:-translate-y-1">
+            GitHub Profile
+        </a>
+    </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="py-28 px-6 max-w-5xl mx-auto text-center">
-<div class="glass p-12 rounded-3xl reveal">
-<h2 class="text-3xl font-bold mb-8 text-blue-500">About Me</h2>
-<p class="text-gray-400 text-lg leading-relaxed">
-I build scalable, production-grade web applications using the MERN stack.
-I focus on clean architecture, performance optimization, and professional digital systems.
-</p>
-</div>
+<section id="about" class="py-24 md:py-32 px-6 max-w-5xl mx-auto text-center relative">
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-[80px] -z-10 rounded-full pointer-events-none"></div>
+    
+    <div class="glass p-10 md:p-16 rounded-[2.5rem] border border-white/10 relative overflow-hidden group shadow-2xl transition-all duration-500 hover:border-blue-500/30">
+        
+        <div class="absolute -top-4 -left-2 text-[150px] text-white/5 font-serif leading-none select-none group-hover:-translate-y-2 transition-transform duration-500">"</div>
+        
+        <h2 class="text-sm md:text-base uppercase tracking-[0.4em] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-8 reveal inline-block relative z-10">Introduction</h2>
+        
+        <p class="text-2xl md:text-4xl lg:text-5xl font-medium leading-snug md:leading-tight reveal text-gray-300 relative z-10">
+            I’m <span class="text-white font-bold">Sannik Mukherjee</span>, a Full-Stack Web Developer dedicated to building <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-black tracking-tight border-b-2 border-blue-500/30 pb-1">production-grade</span> digital experiences. 
+        </p>
+        <p class="mt-8 text-lg md:text-2xl text-gray-400 reveal relative z-10 font-light">
+            I lead <span class="text-gray-200 font-semibold tracking-wide">Novaris</span>, focusing on high-performance architecture.
+        </p>
+    </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills" class="py-28 px-6 bg-[#080808]">
-<div class="max-w-6xl mx-auto text-center">
-<h2 class="text-3xl font-bold mb-16 reveal">Tech Stack</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-<div class="glass p-8 rounded-2xl reveal">
-<h3 class="text-xl font-bold mb-4">Frontend</h3>
-<p class="text-gray-400">React, Tailwind, JavaScript</p>
-</div>
-
-<div class="glass p-8 rounded-2xl reveal">
-<h3 class="text-xl font-bold mb-4">Backend</h3>
-<p class="text-gray-400">Node.js, Express, REST APIs</p>
-</div>
-
-<div class="glass p-8 rounded-2xl reveal">
-<h3 class="text-xl font-bold mb-4">Database</h3>
-<p class="text-gray-400">MongoDB, SQL</p>
-</div>
-</div>
-</div>
+<section id="skills" class="py-24 md:py-32 px-6 bg-[#080808] border-y border-white/5">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 md:mb-16 text-center reveal">The Tech Stack</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass p-8 md:p-10 rounded-3xl reveal" style="transition-delay: 50ms;">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-xl mb-6 flex items-center justify-center text-blue-400 font-bold text-xl">F</div>
+                <h3 class="text-xl font-bold mb-3">Frontend</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed">React.js, Tailwind CSS, JavaScript (ES6+), HTML5/CSS3. Focus on responsive and fluid UI.</p>
+            </div>
+            <div class="glass p-8 md:p-10 rounded-3xl reveal" style="transition-delay: 150ms;">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl mb-6 flex items-center justify-center text-purple-400 font-bold text-xl">B</div>
+                <h3 class="text-xl font-bold mb-3">Backend</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed">Node.js, Express, RESTful APIs, JWT Authentication, and Server-side logic.</p>
+            </div>
+            <div class="glass p-8 md:p-10 rounded-3xl reveal" style="transition-delay: 250ms;">
+                <div class="w-12 h-12 bg-green-500/20 rounded-xl mb-6 flex items-center justify-center text-green-400 font-bold text-xl">D</div>
+                <h3 class="text-xl font-bold mb-3">Database</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed">MongoDB (NoSQL), SQL, Mongoose modeling, and Database optimization.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- PROJECT -->
-<section id="projects" class="py-28 px-6">
-<div class="max-w-6xl mx-auto text-center">
-<h2 class="text-3xl font-bold mb-16 reveal">Featured Project</h2>
+<section id="projects" class="py-24 md:py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 md:mb-16 reveal text-center lg:text-left">Featured Projects</h2>
+        
+        <div class="glass p-6 md:p-12 lg:p-16 rounded-[2.5rem] overflow-hidden reveal shadow-2xl">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-14 items-center text-center lg:text-left">
+                
+                <div class="flex-1 order-2 lg:order-1 w-full p-2 md:p-4 lg:p-0">
+                    <div class="inline-flex items-center justify-center lg:justify-start gap-3 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono text-xs md:text-sm mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
+                        </span>
+                        01 / Featured
+                    </div>
+                    
+                    <h3 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 pb-1">Novaris Initiative</h3>
+                    
+                    <p class="text-gray-400 text-base md:text-xl mb-10 leading-relaxed font-light">
+                        A structured Full Stack ecosystem focused on <span class="text-gray-200 font-medium">modular architecture</span>, clean code, and extreme performance.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                        <span class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-mono text-gray-300 hover:bg-white/10 hover:border-blue-500/50 hover:text-white transition-all transform hover:-translate-y-1">React</span>
+                        <span class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-mono text-gray-300 hover:bg-white/10 hover:border-green-500/50 hover:text-white transition-all transform hover:-translate-y-1">Node.js</span>
+                        <span class="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-mono text-gray-300 hover:bg-white/10 hover:border-purple-500/50 hover:text-white transition-all transform hover:-translate-y-1">MongoDB</span>
+                    </div>
+                </div>
 
-<div class="glass p-14 rounded-3xl reveal">
-<h3 class="text-4xl font-black mb-6">Novaris Initiative</h3>
-<p class="text-gray-400 text-lg">
-A structured MERN ecosystem focused on modular architecture and high performance.
-</p>
-</div>
-</div>
+                <div class="w-full lg:w-1/2 min-h-[250px] sm:min-h-[300px] md:min-h-[350px] order-1 lg:order-2 bg-[#050505] rounded-3xl border border-white/10 overflow-hidden relative group shadow-[0_0_30px_rgba(0,0,0,0.5)] flex-shrink-0">
+                    
+                    <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" 
+                         alt="Cat Coding Process" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700 z-0">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020202] via-black/30 to-transparent z-10 pointer-events-none"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                        <span class="px-8 py-3 bg-black/80 backdrop-blur-md border border-blue-500/50 rounded-full font-bold tracking-[0.2em] text-white text-sm md:text-base shadow-[0_0_30px_rgba(59,130,246,0.4)] animate-pulse">
+                            COMING SOON
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="py-28 px-6 text-center reveal">
-<h2 class="text-4xl font-black mb-8">Let's Build Something.</h2>
-<a href="mailto:mukherjeesannik43@gmail.com"
-class="px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-blue-500 hover:text-white transition transform hover:scale-105">
-Send Email
-</a>
+<section id="contact" class="py-24 md:py-32 px-6 text-center reveal">
+    <h2 class="text-4xl md:text-7xl font-bold mb-8 md:mb-10">Let's build<br>something great.</h2>
+    
+    <a href="mailto:mukherjeesannik43@gmail.com?subject=Let's%20Work%20Together&body=Hi%20Sannik,%0D%0A%0D%0AI%20saw%20your%20portfolio%20and%20wanted%20to%20get%20in%20touch." 
+       class="inline-block px-10 md:px-12 py-4 md:py-5 bg-white text-black font-black rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(59,130,246,0.6)]">
+        SEND AN EMAIL
+    </a>
+    <p class="mt-8 text-gray-500 text-sm">Or directly email at <span class="text-gray-300">mukherjeesannik43@gmail.com</span></p>
 </section>
 
-<footer class="py-8 text-center text-gray-600 text-sm border-t border-white/5">
-© 2026 Sannik Mukherjee
+<footer class="py-8 px-6 border-t border-white/5 text-center text-gray-600 text-xs md:text-sm tracking-widest uppercase bg-[#010101]">
+    &copy; 2026 Sannik Mukherjee — Crafted with Code.
 </footer>
 
 <script>
-window.onload = () => {
-document.body.style.visibility="visible";
-};
+    const text = "Full Stack Web Developer | System Architect";
+    let i = 0;
+    function typing() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 60);
+        }
+    }
+    setTimeout(typing, 500);
 
-/* typing */
-const text="Full Stack Web Developer | MERN Architect";
-let i=0;
-function typing(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,60);
-}
-}
-setTimeout(typing,600);
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-[#030303]/90', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+            nav.classList.remove('py-4');
+            nav.classList.add('py-3');
+        } else {
+            nav.classList.remove('bg-[#030303]/90', 'backdrop-blur-xl', 'border-b', 'border-white/5');
+            nav.classList.remove('py-3');
+            nav.classList.add('py-4');
+        }
+    });
 
-/* navbar shrink */
-window.addEventListener("scroll",()=>{
-const nav=document.getElementById("navbar");
-if(window.scrollY>50){
-nav.classList.add("bg-[#050505]/90","backdrop-blur-xl","border-b","border-white/5","py-3");
-nav.classList.remove("py-5");
-}else{
-nav.classList.remove("bg-[#050505]/90","backdrop-blur-xl","border-b","border-white/5","py-3");
-nav.classList.add("py-5");
-}
-});
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isMenuOpen = false;
 
-/* reveal */
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("active");
-}
-});
-},{threshold:.15});
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            document.body.style.overflow = 'hidden'; 
+        } else {
+            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            document.body.style.overflow = 'auto'; 
+        }
+    }
 
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+    menuBtn.addEventListener('click', toggleMenu);
+    closeMenuBtn.addEventListener('click', toggleMenu);
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(isMenuOpen) toggleMenu();
+        });
+    });
+
+    const observerOptions = {
+        threshold: window.innerWidth < 768 ? 0.05 : 0.15, 
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
 </html>
-
